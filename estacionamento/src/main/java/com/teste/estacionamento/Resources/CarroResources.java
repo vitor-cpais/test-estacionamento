@@ -51,10 +51,10 @@ public class CarroResources {
 
 
 
-    @PatchMapping(value = "/{id}")
-    public ResponseEntity<Carro> update(@PathVariable Long id){
-        service.updateDataSaida(id);
-        return ResponseEntity.ok().build();
-    }
+//    @PatchMapping(value = "/{id}")
+//    public ResponseEntity<Carro> update(@PathVariable Long id){
+//        service.updateDataSaida(id);
+//        return ResponseEntity.ok().build();
+//    }
 
 }

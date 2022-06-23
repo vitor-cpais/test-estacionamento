@@ -19,7 +19,9 @@ public class Carro {
     private String modelo;
     private String placa;
 
+
     private Long tempo;
+
     private Double valor_pago;
 
 
@@ -45,7 +47,17 @@ public class Carro {
 
     @PrePersist
     public void prePersist() {
-        this.setData_entrada(ZonedDateTime.now());
+        if (getData_entrada() == null) {
+            this.setData_entrada(ZonedDateTime.now());
+        }
+
+        if( (getTempo()) == null){
+            this.setTempo(Duration.between(getData_entrada(), getData_saida()).toHours());
+        }
+        if(getTempo() != null){
+            this.setValor_pago(valorTotal());
+
+        }
     }
 
 
@@ -111,7 +123,8 @@ public class Carro {
     }
 
 
-    public double valorTotal(Valor entity) {
+    public double valorTotal() {
+        Valor entity = new Valor();
         setTempo(Duration.between(getData_entrada(), getData_saida()).toHours());
         setValor_pago((getTempo() * entity.getValor_demais_horas()) + entity.getValor_primeira_hora());
         return getValor_pago();

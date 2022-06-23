@@ -23,7 +23,6 @@ public class Valor {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private ZonedDateTime data_fim;
 
-
     public Valor() {
     }
 

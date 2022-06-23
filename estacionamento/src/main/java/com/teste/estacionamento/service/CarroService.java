@@ -40,20 +40,20 @@ public class CarroService {
         if (obj.getModelo() != null) {
             entity.setModelo(obj.getModelo());
         }
+        if (obj.getData_saida() != null) {
+            entity.setData_saida(obj.getData_saida());
+        }
+        if (obj.getData_entrada() != null) {
+            entity.setData_entrada(obj.getData_entrada());
+        }
+
         return repository.save(entity);
     }
 
-//    public void update(Long id, Valor valor){
+//    public void updateDataSaida(Long id) {
 //        Carro entity = repository.findById(id).get();
-//        entity.setValor_pago(entity.valorTotal(valor));
-//        repository.save(entity)
+//        entity.setData_saida(ZonedDateTime.now());
+//        repository.save(entity);
 //    }
-
-
-    public void updateDataSaida(Long id) {
-        Carro entity = repository.findById(id).get();
-        entity.setData_saida(ZonedDateTime.now());
-        repository.save(entity);
-    }
 
 }
