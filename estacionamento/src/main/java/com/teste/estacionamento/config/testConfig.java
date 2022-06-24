@@ -27,10 +27,10 @@ public class testConfig implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
 
-        Carro car1 = new Carro(null,"Ford Focus", "h5htr4",null,null, ZonedDateTime.parse("2019-06-20T13:34:54Z"),ZonedDateTime.parse("2019-06-20T23:53:07Z"));
-        Carro car2 = new Carro(null,"Fiat Uno", "g5hg",null,null, ZonedDateTime.parse("2019-06-20T12:03:32Z"),ZonedDateTime.parse("2019-06-20T23:53:07Z"));
-        Carro car3 = new Carro(null,"Fusca", "7657",null,null, ZonedDateTime.parse("2019-06-20T20:22:01Z"),ZonedDateTime.parse("2019-06-20T23:53:07Z"));
-        Carro car4 = new Carro(null,"titan 150", "5665g",null,null, ZonedDateTime.parse("2019-06-20T03:02:24Z"),ZonedDateTime.parse("2019-06-20T23:53:07Z"));
+        Carro car1 = new Carro(null,"Ford Focus", "h5htr47",null,null, ZonedDateTime.parse("2019-06-20T13:34:54Z"),ZonedDateTime.parse("2019-06-20T23:53:07Z"));
+        Carro car2 = new Carro(null,"Fiat Uno", "1234567",null,null, ZonedDateTime.parse("2019-06-20T12:03:32Z"),ZonedDateTime.parse("2019-06-20T23:53:07Z"));
+        Carro car3 = new Carro(null,"Fusca", "765753g",null,null, ZonedDateTime.parse("2019-06-20T20:22:01Z"),ZonedDateTime.parse("2019-06-20T23:53:07Z"));
+        Carro car4 = new Carro(null,"titan 150", "5f66g5g",null,null, ZonedDateTime.parse("2019-06-20T03:02:24Z"),ZonedDateTime.parse("2019-06-20T23:53:07Z"));
 
         Usuario user1 = new Usuario(null,"testadm","gfg4gf");
         usuarioRepository.save(user1);

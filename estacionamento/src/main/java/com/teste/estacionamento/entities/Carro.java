@@ -2,8 +2,11 @@ package com.teste.estacionamento.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.Duration;
 import java.time.ZonedDateTime;
 
@@ -17,7 +20,13 @@ public class Carro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank
+    @Length(min = 2, max = 50)
     private String modelo;
+
+    @NotBlank
+    @Length(min = 7, max = 7)
     private String placa;
 
 
