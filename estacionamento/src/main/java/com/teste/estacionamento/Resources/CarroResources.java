@@ -22,8 +22,8 @@ public class CarroResources {
 
 
     @GetMapping
-    public ResponseEntity<List<Carro>> findAll(){
-        List<Carro> list = carroService.findAll();
+    public ResponseEntity<List<Carro>> findAllCarros(){
+        List<Carro> list = carroService.findAllCarros();
         return ResponseEntity.ok().body(list);
     }
 
@@ -31,7 +31,7 @@ public class CarroResources {
 
     @PostMapping
     public ResponseEntity<Carro> insert(@RequestBody Carro obj){
-        obj = carroService.insert(obj);
+        obj = carroService.insertCarro(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).body(obj);
     }
@@ -40,7 +40,7 @@ public class CarroResources {
 
     @PutMapping(value="/{id}")
     public ResponseEntity<Carro> update(@PathVariable Long id, @RequestBody Carro obj){
-        obj = carroService.update(id,obj);
+        obj = carroService.updateCarro(id,obj);
         return ResponseEntity.ok().body(obj);
     }
 

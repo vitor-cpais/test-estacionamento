@@ -27,21 +27,19 @@ public class CarroService {
 
 
 
-    public List<Carro> findAll() {
-
-
+    public List<Carro> findAllCarros() {
         return carroRepository.findAll();
     }
 
 
-    public Carro insert(Carro obj) {
+    public Carro insertCarro(Carro obj) {
          obj.setTempo(obj.getTempo());
          obj.setData_saida(ZonedDateTime.now());
         return carroRepository.save(obj);
     }
 
 
-    public Carro update(Long id, Carro obj) {
+    public Carro updateCarro(Long id, Carro obj) {
 
         Carro entity = carroRepository.findById(id).get();
 
