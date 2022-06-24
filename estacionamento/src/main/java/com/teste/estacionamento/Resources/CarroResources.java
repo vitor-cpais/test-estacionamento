@@ -21,6 +21,7 @@ public class CarroResources {
     private CarroService carroService;
 
 
+
     @GetMapping
     public ResponseEntity<List<Carro>> findAllCarros(){
         List<Carro> list = carroService.findAllCarros();
@@ -55,10 +56,5 @@ public class CarroResources {
 
 
 
-//    @PatchMapping(value = "/{id}")
-//    public ResponseEntity<Carro> updateDataSaida(@PathVariable Long id,@RequestBody Carro obj){
-//        carroService.updateDataSaida(id,obj);
-//        return ResponseEntity.ok().build();
-//    }
 
 }

@@ -24,17 +24,14 @@ public class CarroService {
 
 
 
-
-
-
     public List<Carro> findAllCarros() {
         return carroRepository.findAll();
     }
 
 
     public Carro insertCarro(Carro obj) {
-         obj.setTempo(obj.getTempo());
-         obj.setData_saida(ZonedDateTime.now());
+        obj.setTempo(obj.getTempo());
+        obj.setData_saida(ZonedDateTime.now());
         return carroRepository.save(obj);
     }
 
@@ -54,11 +51,16 @@ public class CarroService {
     }
 
 
-
-    public void updateDataSaida(Long id,Carro obj) {
+    public void updateDataSaida(Long id, Carro obj) {
         Carro entity = carroRepository.findById(id).get();
         entity.setData_saida(obj.getData_saida());
-        entity.setTempo(entity.tempoTotal(entity));
+        Integer tempoVaga = entity.tempoTotal(entity);
+        if (tempoVaga == 0) {
+            entity.setTempo(entity.tempoTotal(entity) + 1);
+        } else {
+            entity.setTempo(entity.tempoTotal(entity));
+        }
+
         entity.setValor_pago(entity.precoTotal(obj));
 
         carroRepository.save(entity);

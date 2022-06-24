@@ -2,7 +2,6 @@ package com.teste.estacionamento.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.time.Duration;
@@ -61,7 +60,11 @@ public class Carro {
             Valor valor = new Valor();
             Integer tempoVaga = getTempo() -1;
             setValor_pago((tempoVaga * valor.getValor_demais_horas()) + valor.getValor_primeira_hora());
+            if(getTempo() ==0){
+
+            }
         }
+
 
         }
 
