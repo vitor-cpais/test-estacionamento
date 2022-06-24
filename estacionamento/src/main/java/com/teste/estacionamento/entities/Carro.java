@@ -59,11 +59,12 @@ public class Carro {
 
         if (getTempo() != null) {
             Valor valor = new Valor();
-            setValor_pago(getTempo() * valor.getValor_demais_horas() + 2);
-
+            Integer tempoVaga = getTempo() -1;
+            setValor_pago((tempoVaga * valor.getValor_demais_horas()) + valor.getValor_primeira_hora());
+        }
 
         }
-    }
+
 
 
     public Integer getTempo() {
@@ -126,59 +127,34 @@ public class Carro {
     public Integer tempoTotal(Carro entity) {
 
         entity.setTempo((int) Duration.between(entity.getData_entrada(), entity.getData_saida()).toHours());
-        return this.getTempo();
+        return getTempo();
     }
+
+
+
+
+
 
 
     public Double precoTotal(Carro entity){
         Valor obj = new Valor();
-        setValor_pago(getTempo() * obj.getValor_demais_horas() + 2);
+        if(getTempo() <= 1){
+            setValor_pago((obj.getValor_primeira_hora()));
+        }
+        if(getTempo()>1) {
+            Integer tempoVaga = getTempo() -1;
+            setValor_pago((tempoVaga * obj.getValor_demais_horas()) + obj.getValor_primeira_hora());
+        }
         return getValor_pago();
     }
-
-
-
-
-
-
-
-
-//    public Double precoTotal(Carro obj){
-//        Valor entity = new Valor();
-//        obj.setValor_pago(entity.valorTotal(obj));
-//
-//        return getValor_pago();
-//
-//
-//    }
-
 }
 
 
-//    public double valorTotal() {
-//        Valor entity = new Valor();
-//        Carro obj = new Carro();
-//        if(obj.getTempo() >this.getTempo()){
-//        setValor_pago((getTempo() * entity.getValor_demais_horas()) + entity.getValor_primeira_hora());}
-//        {
-//
-//
-//        }
-//        return getValor_pago();
-//
-//
-//    }
 
 
-//    public double valorTotal(Carro obj) {
-//        Valor entity = new Valor();
-//        if (obj.getTempo() > this.getTempo()){
-//        obj.setValor_pago((getTempo() * entity.getValor_demais_horas()) + entity.getValor_primeira_hora());}
-//        else{
-//            obj.setValor_pago(entity.getValor_primeira_hora());
-//        }
-//
-//         return obj.getValor_pago();
-//    }
+
+
+
+
 
 

@@ -22,17 +22,7 @@ public class CarroService {
     private CarroRepository carroRepository;
 
 
-    public void updateValorTotal(Long id, Carro obj){
-        Carro entity = carroRepository.findById(id).get();
 
-
-//    public void updateDataSaida(Long id, Carro obj) {
-//        Carro entity = repository.findById(id).get();
-//        entity.setData_saida((obj.getData_saida()));
-//        entity.setTempo(entity.tempoTotal(entity));
-//
-//        repository.save(entity);
-    }
 
 
 
@@ -61,23 +51,10 @@ public class CarroService {
         if (obj.getModelo() != null) {
             entity.setModelo(obj.getModelo());
         }
-        //###########REMOVER PUT DE ENTRADA E SAIDA#########
-        if (obj.getData_saida() != null) {
-            entity.setData_saida(obj.getData_saida());
-        }
-        if (obj.getData_entrada() != null) {
-            entity.setData_entrada(obj.getData_entrada());
-        }
 
         return carroRepository.save(entity);
     }
 
-    public void  valorTotal(long id, Carro obj){
-        Carro entity = carroRepository.findById(id).get();
-        entity.setValor_pago(obj.precoTotal(obj));
-
-        carroRepository.save(entity);
-    }
 
 
     public void updateDataSaida(Long id,Carro obj) {
@@ -88,7 +65,6 @@ public class CarroService {
 
         carroRepository.save(entity);
     }
-
 
 
 }
