@@ -20,41 +20,29 @@ public class CarroResources {
     @Autowired
     private CarroService carroService;
 
-
-
     @GetMapping
-    public ResponseEntity<List<Carro>> findAllCarros(){
+    public ResponseEntity<List<Carro>> findAllCarros() {
         List<Carro> list = carroService.findAllCarros();
         return ResponseEntity.ok().body(list);
     }
 
-
-
     @PostMapping
-    public ResponseEntity<Carro> insert(@RequestBody Carro obj){
+    public ResponseEntity<Carro> insert(@RequestBody Carro obj) {
         obj = carroService.insertCarro(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).body(obj);
     }
 
-
-
-    @PutMapping(value="/{id}")
-    public ResponseEntity<Carro> update(@PathVariable Long id, @RequestBody Carro obj){
-        obj = carroService.updateCarro(id,obj);
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Carro> update(@PathVariable Long id, @RequestBody Carro obj) {
+        obj = carroService.updateCarro(id, obj);
         return ResponseEntity.ok().body(obj);
     }
 
-
-
-
     @PatchMapping(value = "/{id}")
-    public ResponseEntity<Carro> valorTotal(@PathVariable Long id,@RequestBody Carro obj){
-        carroService.updateDataSaida(id,obj);
+    public ResponseEntity<Carro> valorTotal(@PathVariable Long id, @RequestBody Carro obj) {
+        carroService.updateDataSaida(id, obj);
         return ResponseEntity.ok().build();
     }
-
-
-
 
 }

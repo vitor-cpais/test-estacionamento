@@ -7,14 +7,12 @@ import java.util.Objects;
 @Table(name = "tbl_usuario")
 public class Usuario {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
     private String senha;
-
 
     public Usuario() {
     }
@@ -48,7 +46,6 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

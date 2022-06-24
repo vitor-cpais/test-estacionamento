@@ -6,7 +6,6 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.time.Duration;
 import java.time.ZonedDateTime;
 
@@ -29,7 +28,6 @@ public class Carro {
     @Length(min = 7, max = 7)
     private String placa;
 
-
     private Integer tempo = 1;
 
     private Double valor_pago;
@@ -43,7 +41,6 @@ public class Carro {
 
     public Carro() {
     }
-
 
     public Carro(Long id, String modelo, String placa, Integer tempo, Double valor_pago, ZonedDateTime data_entrada, ZonedDateTime data_saida) {
         this.id = id;
@@ -60,24 +57,18 @@ public class Carro {
         if (getData_entrada() == null) {
             setData_entrada(ZonedDateTime.now());
         }
-
         if (getTempo() == null) {
             setTempo((int) Duration.between(getData_entrada(), getData_saida()).toHours());
         }
-
         if (getTempo() != null) {
             Valor valor = new Valor();
-            Integer tempoVaga = getTempo() -1;
+            Integer tempoVaga = getTempo() - 1;
             setValor_pago((tempoVaga * valor.getValor_demais_horas()) + valor.getValor_primeira_hora());
-            if(getTempo() ==0){
+            if (getTempo() == 0) {
 
             }
         }
-
-
-        }
-
-
+    }
 
     public Integer getTempo() {
         return tempo;
@@ -142,19 +133,13 @@ public class Carro {
         return getTempo();
     }
 
-
-
-
-
-
-
-    public Double precoTotal(Carro entity){
+    public Double precoTotal(Carro entity) {
         Valor obj = new Valor();
-        if(getTempo() <= 1){
+        if (getTempo() <= 1) {
             setValor_pago((obj.getValor_primeira_hora()));
         }
-        if(getTempo()>1) {
-            Integer tempoVaga = getTempo() -1;
+        if (getTempo() > 1) {
+            Integer tempoVaga = getTempo() - 1;
             setValor_pago((tempoVaga * obj.getValor_demais_horas()) + obj.getValor_primeira_hora());
         }
         return getValor_pago();

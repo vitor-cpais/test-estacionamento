@@ -14,7 +14,6 @@ public class Valor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     private Double valor_primeira_hora = 6.00;
     private Double valor_demais_horas = 4.00;
 
@@ -23,7 +22,6 @@ public class Valor {
 
     public Valor() {
     }
-
 
     public Long getId() {
         return id;
@@ -56,8 +54,6 @@ public class Valor {
     public void setData_fim(ZonedDateTime data_fim) {
         this.data_fim = data_fim;
     }
-
-
 
 
 }
