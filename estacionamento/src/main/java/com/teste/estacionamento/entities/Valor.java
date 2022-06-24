@@ -2,10 +2,8 @@ package com.teste.estacionamento.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import com.teste.estacionamento.entities.Carro;
+
 import javax.persistence.*;
-import java.time.Duration;
-import java.time.Instant;
 import java.time.ZonedDateTime;
 
 @Entity
@@ -60,7 +58,21 @@ public class Valor {
     }
 
 
+//    public Double valorTotal(Carro obj) {
+//        Carro entity = new Carro();
+//        obj.setValor_pago((obj.getTempo() * getValor_demais_horas()) + getValor_primeira_hora());
+//        if (obj.getTempo() > entity.getTempo()) {
+//            obj.setValor_pago((obj.getTempo() * getValor_demais_horas()) + getValor_primeira_hora());
+//        } else {
+//            obj.setValor_pago(getValor_primeira_hora());
+//        }
+//
+//        return obj.getValor_pago();
+//    }
 
 
 
 }
+
+
+

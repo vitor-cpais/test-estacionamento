@@ -18,24 +18,20 @@ import java.util.List;
 public class CarroResources {
 
     @Autowired
-    private CarroService service;
+    private CarroService carroService;
 
 
     @GetMapping
     public ResponseEntity<List<Carro>> findAll(){
-        List<Carro> list = service.findAll();
+        List<Carro> list = carroService.findAll();
         return ResponseEntity.ok().body(list);
     }
 
-//    public ResponseEntity<List<Carro>> findAllCheckIn(){
-//
-//
-//    }
 
 
     @PostMapping
     public ResponseEntity<Carro> insert(@RequestBody Carro obj){
-        obj = service.insert(obj);
+        obj = carroService.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).body(obj);
     }
@@ -44,16 +40,24 @@ public class CarroResources {
 
     @PutMapping(value="/{id}")
     public ResponseEntity<Carro> update(@PathVariable Long id, @RequestBody Carro obj){
-        obj = service.update(id,obj);
+        obj = carroService.update(id,obj);
         return ResponseEntity.ok().body(obj);
     }
 
 
 
 
+    @PatchMapping(value = "/{id}")
+    public ResponseEntity<Carro> valorTotal(@PathVariable Long id,@RequestBody Carro obj){
+        carroService.updateDataSaida(id,obj);
+        return ResponseEntity.ok().build();
+    }
+
+
+
 //    @PatchMapping(value = "/{id}")
-//    public ResponseEntity<Carro> update(@PathVariable Long id){
-//        service.updateDataSaida(id);
+//    public ResponseEntity<Carro> updateDataSaida(@PathVariable Long id,@RequestBody Carro obj){
+//        carroService.updateDataSaida(id,obj);
 //        return ResponseEntity.ok().build();
 //    }
 

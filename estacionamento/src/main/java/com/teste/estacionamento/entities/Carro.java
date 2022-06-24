@@ -2,6 +2,7 @@ package com.teste.estacionamento.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.time.Duration;
@@ -13,6 +14,7 @@ import java.time.ZonedDateTime;
 @DynamicUpdate
 public class Carro {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,7 +22,7 @@ public class Carro {
     private String placa;
 
 
-    private Long tempo;
+    private Integer tempo = 1;
 
     private Double valor_pago;
 
@@ -34,7 +36,8 @@ public class Carro {
     public Carro() {
     }
 
-    public Carro(Long id, String modelo, String placa, Long tempo, Double valor_pago, ZonedDateTime data_entrada, ZonedDateTime data_saida) {
+
+    public Carro(Long id, String modelo, String placa, Integer tempo, Double valor_pago, ZonedDateTime data_entrada, ZonedDateTime data_saida) {
         this.id = id;
         this.modelo = modelo;
         this.placa = placa;
@@ -44,33 +47,30 @@ public class Carro {
         this.data_saida = data_saida;
     }
 
-
     @PrePersist
     public void prePersist() {
         if (getData_entrada() == null) {
-            this.setData_entrada(ZonedDateTime.now());
+            setData_entrada(ZonedDateTime.now());
         }
 
-        if( (getTempo()) == null){
-            this.setTempo(Duration.between(getData_entrada(), getData_saida()).toHours());
+        if (getTempo() == null) {
+            setTempo((int) Duration.between(getData_entrada(), getData_saida()).toHours());
         }
-        if(getTempo() != null){
-            this.setValor_pago(valorTotal());
+
+        if (getTempo() != null) {
+            Valor valor = new Valor();
+            setValor_pago(getTempo() * valor.getValor_demais_horas() + 2);
+
 
         }
     }
 
 
-
-
-
-
-
-    public Long getTempo() {
+    public Integer getTempo() {
         return tempo;
     }
 
-    public void setTempo(Long tempo) {
+    public void setTempo(Integer tempo) {
         this.tempo = tempo;
     }
 
@@ -123,13 +123,62 @@ public class Carro {
     }
 
 
-    public double valorTotal() {
-        Valor entity = new Valor();
-        setTempo(Duration.between(getData_entrada(), getData_saida()).toHours());
-        setValor_pago((getTempo() * entity.getValor_demais_horas()) + entity.getValor_primeira_hora());
-        return getValor_pago();
+    public Integer tempoTotal(Carro entity) {
 
-
+        entity.setTempo((int) Duration.between(entity.getData_entrada(), entity.getData_saida()).toHours());
+        return this.getTempo();
     }
 
+
+    public Double precoTotal(Carro entity){
+        Valor obj = new Valor();
+        setValor_pago(getTempo() * obj.getValor_demais_horas() + 2);
+        return getValor_pago();
+    }
+
+
+
+
+
+
+
+
+//    public Double precoTotal(Carro obj){
+//        Valor entity = new Valor();
+//        obj.setValor_pago(entity.valorTotal(obj));
+//
+//        return getValor_pago();
+//
+//
+//    }
+
 }
+
+
+//    public double valorTotal() {
+//        Valor entity = new Valor();
+//        Carro obj = new Carro();
+//        if(obj.getTempo() >this.getTempo()){
+//        setValor_pago((getTempo() * entity.getValor_demais_horas()) + entity.getValor_primeira_hora());}
+//        {
+//
+//
+//        }
+//        return getValor_pago();
+//
+//
+//    }
+
+
+//    public double valorTotal(Carro obj) {
+//        Valor entity = new Valor();
+//        if (obj.getTempo() > this.getTempo()){
+//        obj.setValor_pago((getTempo() * entity.getValor_demais_horas()) + entity.getValor_primeira_hora());}
+//        else{
+//            obj.setValor_pago(entity.getValor_primeira_hora());
+//        }
+//
+//         return obj.getValor_pago();
+//    }
+
+
